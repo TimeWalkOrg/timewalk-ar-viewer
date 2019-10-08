@@ -5,9 +5,12 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
+  - enabled: 0
+    path: Assets/Scenes/mainScene PlaceOnPlane.unity
+    guid: 136e4e5ccf04e4d97b1022dff267d772
   - enabled: 1
-    path: Assets/mainScene Heisler.unity
-    guid: 89885e4b6440a4fd784b3f7c3022f3fa
+    path: Assets/Scenes/mainScene MakeAppearOnPlane.unity
+    guid: 35497234991d1492297b48f69c99500d
   m_configObjects:
     com.unity.xr.arkit.PlayerSettings: {fileID: 11400000, guid: 2d5fb8e61571b4e3897f221189089fd6,
       type: 2}

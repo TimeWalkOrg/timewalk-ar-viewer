@@ -166,7 +166,7 @@ PlayerSettings:
   applicationIdentifier:
     Android: com.virtualxdesign.artemplate
     Standalone: com.unity.arfoundation.samples
-    iPhone: com.timewalk.artest
+    iPhone: com.timewalk.arviewer
   buildNumber: {}
   AndroidBundleVersionCode: 1
   AndroidMinSdkVersion: 24
