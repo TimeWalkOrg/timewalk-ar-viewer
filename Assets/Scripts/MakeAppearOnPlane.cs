@@ -46,6 +46,12 @@ public class MakeAppearOnPlane : MonoBehaviour
     {
         m_SessionOrigin = GetComponent<ARSessionOrigin>();
         m_RaycastManager = GetComponent<ARRaycastManager>();
+
+        foreach (Transform child in content)
+        {
+            child.gameObject.SetActive(false); // hide children of the content object
+        }
+
     }
 
     void Update()
@@ -64,6 +70,10 @@ public class MakeAppearOnPlane : MonoBehaviour
             // This does not move the content; instead, it moves and orients the ARSessionOrigin
             // such that the content appears to be at the raycast hit position.
             m_SessionOrigin.MakeContentAppearAt(content, hitPose.position, m_Rotation);
+            foreach (Transform child in content)
+            {
+                child.gameObject.SetActive(true); // SHOW children of the content object
+            }
         }
     }
 
