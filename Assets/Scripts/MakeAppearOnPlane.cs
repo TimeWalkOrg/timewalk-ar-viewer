@@ -1,7 +1,12 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
+
+// TO DO: Ignore slider touches (don't move the model when touching sliders)
+// TO DO: Enable Menu button to bring up sliders and controls
+// TO DO: Allow user to switch models (buildings, trains, etc.)
+
 
 /// <summary>
 /// Moves the ARSessionOrigin in such a way that it makes the given content appear to be
