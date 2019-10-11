@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8096537660660445683}
   m_Layer: 0
-  m_Name: Allen & Roseveare Grocers (1910)
+  m_Name: 02 - Allen & Roseveare Grocers (1910)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44,11 +44,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400068, guid: de4e40e264f97444e8a2b1907c6d12e5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400068, guid: de4e40e264f97444e8a2b1907c6d12e5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400068, guid: de4e40e264f97444e8a2b1907c6d12e5, type: 3}
       propertyPath: m_LocalPosition.z
