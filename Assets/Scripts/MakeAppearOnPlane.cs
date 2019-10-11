@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
 
@@ -43,7 +44,12 @@ public class MakeAppearOnPlane : MonoBehaviour
         {
             m_Rotation = value;
             if (m_SessionOrigin != null)
-                m_SessionOrigin.MakeContentAppearAt(content, content.transform.position, m_Rotation);
+            {
+                if (!EventSystem.current.IsPointerOverGameObject())
+                {
+                    m_SessionOrigin.MakeContentAppearAt(content, content.transform.position, m_Rotation);
+                }
+            }
         }
     }
 
@@ -54,15 +60,18 @@ public class MakeAppearOnPlane : MonoBehaviour
 
         foreach (Transform child in content)
         {
-            child.gameObject.SetActive(false); // hide children of the content object
+            //child.gameObject.SetActive(false); // hide children of the content object
         }
 
     }
 
     void Update()
     {
-        if (Input.touchCount == 0 || m_Content == null)
-            return;
+        if (Input.touchCount == 0 || m_Content == null || EventSystem.current.IsPointerOverGameObject())
+        {
+            Debug.Log("Click in UI, ignore placement");
+            return; // don't move if in UI
+        }
 
         var touch = Input.GetTouch(0);
 
