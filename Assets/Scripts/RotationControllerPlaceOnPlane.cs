@@ -98,7 +98,6 @@ public class RotationControllerPlaceOnPlane : MonoBehaviour
 
 	void UpdateText()
 	{
-		if (m_Text != null)
-			m_Text.text = "Rotation: " + angle + " degrees";
+		//if (m_Text != null) m_Text.text = "Rotation: " + angle + " degrees";
 	}
 }

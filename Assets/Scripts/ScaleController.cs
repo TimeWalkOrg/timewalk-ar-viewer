@@ -96,8 +96,7 @@ public class ScaleController : MonoBehaviour
 
     void UpdateText()
     {
-        if (text != null)
-            text.text = "Scale: " + scale;
+        //if (text != null) text.text = "Scale: " + scale;
     }
 
     ARSessionOrigin m_SessionOrigin;

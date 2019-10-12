@@ -60,7 +60,7 @@ public class MakeAppearOnPlane : MonoBehaviour
 
         foreach (Transform child in content)
         {
-            //child.gameObject.SetActive(false); // hide children of the content object
+            child.gameObject.SetActive(false); // hide children of the content object
         }
 
     }
