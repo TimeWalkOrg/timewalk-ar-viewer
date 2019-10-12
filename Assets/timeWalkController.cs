@@ -40,7 +40,6 @@ public class timeWalkController : MonoBehaviour
 
         currentObject = myObj;
 
-
         //audioData = GetComponent<AudioSource>();
         //audioData.Play(0);
     }

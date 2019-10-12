@@ -36,7 +36,7 @@ public class ScaleController : MonoBehaviour
 
     [SerializeField]
     [Tooltip("Minimum scale factor.")]
-    public float m_Min = .1f;
+    public float m_Min = .5f;
 
     /// <summary>
     /// Minimum scale factor.
