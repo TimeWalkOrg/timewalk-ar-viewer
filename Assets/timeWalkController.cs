@@ -36,6 +36,7 @@ public class timeWalkController : MonoBehaviour
         objectNameString = myObj.name;
         objectNameString = objectNameString.Substring(5);
         objectNameText.text = objectNameString.Replace("(Clone)", "");
+        Debug.Log("New object: " + objectNameText.text);
 
         currentObject = myObj;
 
@@ -72,6 +73,7 @@ public class timeWalkController : MonoBehaviour
         objectNameString = myObj.name;
         objectNameString = objectNameString.Substring(5);
         objectNameText.text = objectNameString.Replace("(Clone)", "");
+        Debug.Log("New object: " + objectNameText.text);
         // myObj.transform.position = transform.position; // NO: instead we will use the object's default position
         currentObject = myObj;
         Debug.Log("currentObjectIndex = " + currentObjectIndex);
@@ -80,8 +82,6 @@ public class timeWalkController : MonoBehaviour
     void Update()
     {
     }
-
-
 
     static List<ARRaycastHit> s_Hits = new List<ARRaycastHit>();
 
