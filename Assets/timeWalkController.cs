@@ -47,7 +47,6 @@ public class timeWalkController : MonoBehaviour
     public void NextPrefab(int incrementValue)
     {
 
-    //    if (EventSystem.current.IsPointerOverGameObject()) return;
         Debug.Log("clicked NEXT");
         SpawnNextObject(incrementValue);
     }

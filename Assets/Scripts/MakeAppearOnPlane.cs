@@ -67,11 +67,17 @@ public class MakeAppearOnPlane : MonoBehaviour
 
     void Update()
     {
-        if (Input.touchCount == 0 || m_Content == null || EventSystem.current.IsPointerOverGameObject())
+        if (Input.touchCount == 0 || m_Content == null)
+        {
+            return; // don't update if just touched or m_Content is null (not set yet)
+        }
+
+        if (EventSystem.current.IsPointerOverGameObject())
         {
             Debug.Log("Click in UI, ignore placement");
-            return; // don't move if in UI
+            return;
         }
+
 
         var touch = Input.GetTouch(0);
 
