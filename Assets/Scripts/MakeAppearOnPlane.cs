@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
+
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
 
@@ -20,6 +22,10 @@ public class MakeAppearOnPlane : MonoBehaviour
     [SerializeField]
     [Tooltip("A transform which should be made to appear to be at the touch point.")]
     Transform m_Content;
+    public Text debugText;
+
+    // Good examples of tracking here: https://github.com/google-ar/arcore-unity-sdk/blob/master/Assets/GoogleARCore/Examples/HelloAR/Scripts/HelloARController.cs
+
 
     /// <summary>
     /// A transform which should be made to appear to be at the touch point.
@@ -67,19 +73,25 @@ public class MakeAppearOnPlane : MonoBehaviour
 
     void Update()
     {
-        if (Input.touchCount == 0 || m_Content == null)
+        Touch touch; // per ARCore example (compare to below)
+        //var touch = Input.GetTouch(0);
+
+        //if (Input.touchCount == 0 || m_Content == null) // My OLD way
+        if (Input.touchCount < 1 || (touch = Input.GetTouch(0)).phase != TouchPhase.Began)
+
         {
             return; // don't update if just touched or m_Content is null (not set yet)
         }
 
-        if (EventSystem.current.IsPointerOverGameObject())
+        if (EventSystem.current.IsPointerOverGameObject(touch.fingerId))
         {
             Debug.Log("Click in UI, ignore placement");
+            debugText.text = "Clicked in UI";
+
             return;
         }
 
 
-        var touch = Input.GetTouch(0);
 
         if (m_RaycastManager.Raycast(touch.position, s_Hits, TrackableType.PlaneWithinPolygon))
         {
