@@ -10,12 +10,17 @@ public class chooseCanvas : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        portraitCanvas.SetActive(true);
+        landscapeCanvas.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
+#if UNITY_EDITOR
+        return;
+#else
+
         if (Input.deviceOrientation == DeviceOrientation.Portrait || Input.deviceOrientation == DeviceOrientation.PortraitUpsideDown)
         {
             //codes for portrait
@@ -30,5 +35,6 @@ public class chooseCanvas : MonoBehaviour
             landscapeCanvas.SetActive(true);
 
         }
+#endif
     }
 }

@@ -17,8 +17,11 @@ public class timeWalkController : MonoBehaviour
     public static int objectsListLength = 0;
     public static GameObject currentObject;
     public static int incrementObject = 0;
+    public static int counterText = 0;
     public Text objectNameText;
-    public string objectNameString;
+    public Text debugText;
+    private string objectNameString;
+    private static GameObject trackables;
 
     void Start()
     {
@@ -37,8 +40,11 @@ public class timeWalkController : MonoBehaviour
         objectNameString = objectNameString.Substring(5);
         objectNameText.text = objectNameString.Replace("(Clone)", "");
         Debug.Log("New object: " + objectNameText.text);
+        myObj.transform.gameObject.SetActive(false); // hide object at start (not yet placed)
 
         currentObject = myObj;
+
+        //debugText.text = "Started App";
 
         //audioData = GetComponent<AudioSource>();
         //audioData.Play(0);
@@ -73,13 +79,29 @@ public class timeWalkController : MonoBehaviour
         objectNameText.text = objectNameString.Replace("(Clone)", "");
         Debug.Log("New object: " + objectNameText.text);
         // myObj.transform.position = transform.position; // NO: instead we will use the object's default position
+        myObj.transform.gameObject.SetActive(true);
         currentObject = myObj;
-        Debug.Log("currentObjectIndex = " + currentObjectIndex);
+        // debugText.text = "currentObjectIndex = " + currentObjectIndex;
     }
 
     void Update()
+
     {
+        // Get a specific gameobject with its name
+        trackables = GameObject.Find("Trackables");
+        debugText.text = "LIST: ";
+        counterText = 0;
+        Debug.Log(trackables.name);
+        // To find child in a specific gameobject
+        foreach (Transform child in trackables.transform)
+        {
+            Debug.Log(child.name);
+            debugText.text += child.name + "\n";
+            counterText++;
+        }
+        debugText.text = "TOTAL " + counterText + "\n" + debugText.text;
     }
+
 
     static List<ARRaycastHit> s_Hits = new List<ARRaycastHit>();
 
