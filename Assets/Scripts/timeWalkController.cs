@@ -17,11 +17,14 @@ public class timeWalkController : MonoBehaviour
     public static int objectsListLength = 0;
     public static GameObject currentObject;
     public static int incrementObject = 0;
-    public static int counterText = 0;
+    public static int trackablesTotal = 0;
     public Text objectNameText;
     public Text debugText;
     private string objectNameString;
     private static GameObject trackables;
+
+
+    // public Transform tutorialAnimationToHide;
 
     void Start()
     {
@@ -87,19 +90,24 @@ public class timeWalkController : MonoBehaviour
     void Update()
 
     {
-        // Get a specific gameobject with its name
-        trackables = GameObject.Find("Trackables");
-        debugText.text = "LIST: ";
-        counterText = 0;
-        Debug.Log(trackables.name);
-        // To find child in a specific gameobject
-        foreach (Transform child in trackables.transform)
-        {
-            Debug.Log(child.name);
-            debugText.text += child.name + "\n";
-            counterText++;
-        }
-        debugText.text = "TOTAL " + counterText + "\n" + debugText.text;
+        //// Get a specific gameobject with its name
+        //trackables = GameObject.Find("Trackables");
+        ////debugText.text = "LIST: ";
+        //trackablesTotal = 0;
+        ////Debug.Log(trackables.name);
+        //// To find child in a specific gameobject
+        //foreach (Transform child in trackables.transform)
+        //{
+        //    //Debug.Log(child.name);
+        //    //debugText.text += child.name + "\n";
+        //    trackablesTotal++;
+        //}
+        ////debugText.text = "TOTAL " + counterText + "\n" + debugText.text;
+        //if(trackablesTotal > 0)
+        //{
+        //    debugText.text = "FOUND PLANE!";
+        //    tutorialAnimationToHide.transform.gameObject.SetActive(false);
+        //}
     }
 
 
