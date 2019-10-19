@@ -56,7 +56,6 @@ public class timeWalkController : MonoBehaviour
     public void NextPrefab(int incrementValue)
     {
 
-        Debug.Log("clicked NEXT");
         SpawnNextObject(incrementValue);
     }
 
@@ -75,6 +74,9 @@ public class timeWalkController : MonoBehaviour
         }
 
         GameObject myObj = Instantiate(myListObjects[currentObjectIndex]) as GameObject;
+
+        myObj.transform.gameObject.SetActive(true); // Is this necessary???
+
         myObj.transform.parent = gameObject.transform; // set new myObj as child of current object?
 
         objectNameString = myObj.name;
@@ -82,7 +84,7 @@ public class timeWalkController : MonoBehaviour
         objectNameText.text = objectNameString.Replace("(Clone)", "");
         Debug.Log("New object: " + objectNameText.text);
         // myObj.transform.position = transform.position; // NO: instead we will use the object's default position
-        myObj.transform.gameObject.SetActive(true);
+
         currentObject = myObj;
         // debugText.text = "currentObjectIndex = " + currentObjectIndex;
     }

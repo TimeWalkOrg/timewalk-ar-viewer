@@ -32,7 +32,7 @@ public class timeWalkDebug : MonoBehaviour
     }
     void PlaneOnBoundaryChanged(ARPlaneBoundaryChangedEventArgs obj)
     {
-        Debug.Log("boundary changed");
+        // Debug.Log("boundary changed");
         debugText.text = "boundary changed";
     }
 }
