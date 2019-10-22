@@ -98,11 +98,7 @@ public class RotationController : MonoBehaviour
 
     void UpdateText()
     {
-        
         if (m_Text != null)
-        {
-            //m_Text.text = "Rotation: " + angle + " degrees";
-            // private string angleText = angle.ToString("0.0"); // TO DO: Round off to nearest 0.1 degrees
-        }
+            m_Text.text = "Rotation: " + angle + " degrees";
     }
- }
+}

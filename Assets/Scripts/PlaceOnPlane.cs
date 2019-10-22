@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
 
@@ -16,6 +18,14 @@ public class PlaceOnPlane : MonoBehaviour
     [SerializeField]
     [Tooltip("Instantiates this prefab on a plane at the touch location.")]
     GameObject m_PlacedPrefab;
+
+
+    // Assign in the inspector
+    private GameObject objectToRotate;
+    public Slider slider;
+
+    // Preserve the original and current orientation
+    private float previousValue;
 
     /// <summary>
     /// The prefab to instantiate on touch.
@@ -34,6 +44,12 @@ public class PlaceOnPlane : MonoBehaviour
     void Awake()
     {
         m_RaycastManager = GetComponent<ARRaycastManager>();
+
+        // Assign a callback for when the rotation slider changes
+        this.slider.onValueChanged.AddListener(this.OnSliderChanged);
+
+        // And current value
+        this.previousValue = this.slider.value;
     }
 
     bool TryGetTouchPosition(out Vector2 touchPosition)
@@ -59,6 +75,24 @@ public class PlaceOnPlane : MonoBehaviour
 
     void Update()
     {
+
+        // Return if clicking in UI area
+        Touch touch; // per ARCore example (compare to below)
+
+        if (Input.touchCount < 1 || (touch = Input.GetTouch(0)).phase != TouchPhase.Began)
+        {
+            return; // don't update if just touched or m_Content is null (not set yet)
+        }
+
+        if (EventSystem.current.IsPointerOverGameObject(touch.fingerId))
+        {
+            // debugText.text = "Clicked in UI";
+            return;
+        }
+
+
+
+
         if (!TryGetTouchPosition(out Vector2 touchPosition))
             return;
 
@@ -71,12 +105,30 @@ public class PlaceOnPlane : MonoBehaviour
             if (spawnedObject == null)
             {
                 spawnedObject = Instantiate(m_PlacedPrefab, hitPose.position, hitPose.rotation);
+                objectToRotate = spawnedObject;
             }
             else
             {
                 spawnedObject.transform.position = hitPose.position;
             }
         }
+    }
+
+
+    void OnSliderChanged(float value)
+    {
+        // objectToRotate = GameObject.Find("TimeWalkObject");
+        Debug.Log("object: " + objectToRotate);
+
+        // How much we've changed
+        float delta = value - this.previousValue;
+        this.objectToRotate.transform.Rotate(Vector3.down * delta * 360);
+
+
+        Debug.Log("object transform: " + objectToRotate.transform);
+
+        // Set our previous value for the next change
+        this.previousValue = value;
     }
 
     static List<ARRaycastHit> s_Hits = new List<ARRaycastHit>();
