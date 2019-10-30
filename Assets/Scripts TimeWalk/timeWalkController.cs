@@ -1,23 +1,29 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
+using UnityEngine.XR.ARFoundation;
+using UnityEngine.XR.ARSubsystems;
 
-public class timeWalkController : MonoBehaviour
+
+public class timewalkController : MonoBehaviour
 {
-    //define a list where the prefabs will be stored
-    public static List<GameObject> myListObjects = new List<GameObject>();
-    public static int numSpawned = 0;
-    public static int numToSpawn = 3;
+    
+    public static List<GameObject> myListObjects = new List<GameObject>(); // list where prefabs will be stored
     public static int currentObjectIndex = 0;
     public static int objectsListLength = 0;
     public static GameObject currentObject;
-    public static int incrementObject = 0;
-    public static bool audioPlayingNow = true;
+    private Text modelNameText;
+    private Text debugText;
+    private string objectNameString;
 
-    public AudioSource audioData;
 
     void Start()
     {
+        modelNameText = GameObject.Find("Model Name").GetComponent<Text>();
+        debugText = GameObject.Find("Debug Text").GetComponent<Text>();
+
         // NOTE: make sure all building prefabs are inside this folder: "Assets/Resources/Prefabs"
 
         Object[] subListObjects = Resources.LoadAll("Prefabs", typeof(GameObject));
@@ -28,14 +34,29 @@ public class timeWalkController : MonoBehaviour
             ++objectsListLength;
         }
         GameObject myObj = Instantiate(myListObjects[currentObjectIndex]) as GameObject;
+        myObj.transform.parent = gameObject.transform; // make instantiated object a child of the TimeWalkObject?
+        objectNameString = myObj.name;
+        objectNameString = objectNameString.Substring(5);
+        modelNameText.text = objectNameString.Replace("(Clone)", "");
+        // modelNameText.text = "Place model below"; // blank name until placed
+        myObj.transform.gameObject.SetActive(true); // hide object at start (not yet placed)
+
         currentObject = myObj;
 
-        audioData = GetComponent<AudioSource>();
-        // audioData.Play(0);
-        // Debug.Log("started");
+        debugText.text = "";
+        //debugText.transform.gameObject.SetActive(false); // hide debugText until there is a message
+
+        //audioData = GetComponent<AudioSource>();
+        //audioData.Play(0);
     }
 
-    void SpawnNextObject(int incrementNumber)
+    public void NextPrefab(int incrementValue)
+    {
+
+        SpawnNextObject(incrementValue);
+    }
+
+    public void SpawnNextObject(int incrementNumber)
     {
         Destroy(currentObject);
         currentObjectIndex = currentObjectIndex + incrementNumber;
@@ -50,48 +71,32 @@ public class timeWalkController : MonoBehaviour
         }
 
         GameObject myObj = Instantiate(myListObjects[currentObjectIndex]) as GameObject;
+
+        myObj.transform.gameObject.SetActive(true); // Is this necessary???
+
+        myObj.transform.parent = gameObject.transform;
+
+        objectNameString = myObj.name;
+        objectNameString = objectNameString.Substring(5);
+        modelNameText.text = objectNameString.Replace("(Clone)", "");
+        debugText.text = "New model: " + modelNameText.text;
+        debugText.transform.gameObject.SetActive(false); // show debugText
+
         // myObj.transform.position = transform.position; // NO: instead we will use the object's default position
+
         currentObject = myObj;
-        // Debug.Log("currentObjectIndex = " + currentObjectIndex);
+        // debugText.text = "currentObjectIndex = " + currentObjectIndex;
     }
 
     void Update()
+
     {
-        //incrementObject = 0;
-        //if (OVRInput.GetUp(OVRInput.Button.One, OVRInput.Controller.RTouch) || Input.GetKeyDown(KeyCode.N))
-        //// if (OVRInput.Get(OVRInput.RawButton.RIndexTrigger))
-        //{
-        //    incrementObject = 1;
-        //    SpawnNextObject(incrementObject);
-        //}
-        //if (OVRInput.GetUp(OVRInput.Button.Two, OVRInput.Controller.RTouch) || Input.GetKeyDown(KeyCode.P))
-
-        //{
-        //    incrementObject = -1;
-        //    SpawnNextObject(incrementObject);
-        //}
-
 
     }
 
-    void HideThese()
-    {
-        // Pause-unpause music
-        //if (OVRInput.GetUp(OVRInput.Button.One, OVRInput.Controller.LTouch) || Input.GetKeyDown(KeyCode.Space))
 
-        //{
-        //    if (audioPlayingNow)
-        //    {
-        //        audioData.Pause();
-        //        audioPlayingNow = false;
-        //    }
-        //    else
-        //    {
-        //        audioData.UnPause();
-        //        audioPlayingNow = true;
-        //    }
+    static List<ARRaycastHit> s_Hits = new List<ARRaycastHit>();
 
-        //}
-    }
+    ARRaycastManager m_RaycastManager;
 
 }

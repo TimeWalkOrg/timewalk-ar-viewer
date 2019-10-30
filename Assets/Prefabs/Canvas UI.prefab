@@ -434,7 +434,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
-        m_MethodName: NextPrefab
+        m_MethodName: SpawnNextObject
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -947,7 +947,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
-        m_MethodName: NextPrefab
+        m_MethodName: SpawnNextObject
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1212,8 +1212,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 10, y: 37}
-  m_SizeDelta: {x: -780, y: 120}
+  m_AnchoredPosition: {x: -84.5, y: 168}
+  m_SizeDelta: {x: -591, y: 120}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &6570594508424440845
 MonoBehaviour:
@@ -1266,7 +1266,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
-        m_MethodName: OnSliderValueChanged
+        m_MethodName: 
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1334,7 +1334,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 25
+  m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
@@ -1484,7 +1484,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 41, y: 191}
+  m_AnchoredPosition: {x: 41, y: 55}
   m_SizeDelta: {x: 150, y: 100}
   m_Pivot: {x: 0, y: 0}
 --- !u!222 &6570594508732194421
@@ -1560,7 +1560,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.25}
   m_AnchorMax: {x: 1, y: 0.75}
-  m_AnchoredPosition: {x: 5, y: 0}
+  m_AnchoredPosition: {x: -5, y: 0}
   m_SizeDelta: {x: -20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &6570594509055678720
@@ -1781,7 +1781,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -84.5, y: 180}
+  m_AnchoredPosition: {x: -84.5, y: 44}
   m_SizeDelta: {x: -591, y: 120}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &6570594509711488032
@@ -1826,11 +1826,11 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6570594508354981901}
   m_FillRect: {fileID: 6570594508423846635}
   m_HandleRect: {fileID: 6570594508354981900}
-  m_Direction: 1
-  m_MinValue: 0
-  m_MaxValue: 1
+  m_Direction: 0
+  m_MinValue: 0.1
+  m_MaxValue: 10
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
@@ -1879,7 +1879,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 41, y: 50}
+  m_AnchoredPosition: {x: 41, y: 181}
   m_SizeDelta: {x: 150, y: 100}
   m_Pivot: {x: 0, y: 0}
 --- !u!222 &6570594509819016525

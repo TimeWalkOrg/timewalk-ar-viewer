@@ -62,7 +62,6 @@ public class TimeWalkPlaceOnPlane : MonoBehaviour
         // And current value
         this.previousValue = this.scaleSlider.value;
 
-
     }
 
     bool TryGetTouchPosition(out Vector2 touchPosition)
@@ -115,7 +114,7 @@ public class TimeWalkPlaceOnPlane : MonoBehaviour
             // will be the closest hit.
             var hitPose = s_Hits[0].pose;
 
-            if (spawnedObject == null)
+            if (spawnedObject == null) // if the object has not been spawned yet
             {
                 spawnedObject = Instantiate(m_PlacedPrefab, hitPose.position, hitPose.rotation);
                 timeWalkObject = spawnedObject;
