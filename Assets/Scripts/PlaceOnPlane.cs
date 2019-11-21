@@ -22,52 +22,55 @@ public class PlaceOnPlane : MonoBehaviour
 
     // Assign in the inspector
     private GameObject objectToRotate;
-    public Slider slider;
+    public Slider rotationSlider;
+    public Slider scaleSlider;
 
     // Preserve the original and current orientation
     private float previousValue;
 
-    /// <summary>
-    /// The prefab to instantiate on touch.
-    /// </summary>
+    private Text debugText;
+    private Text modelNameText;
+    private string objectNameString;
+
     public GameObject placedPrefab
     {
         get { return m_PlacedPrefab; }
         set { m_PlacedPrefab = value; }
     }
 
-    /// <summary>
-    /// The object instantiated as a result of a successful raycast intersection with a plane.
-    /// </summary>
+    // The object instantiated as a result of a successful raycast intersection with a plane.
     public GameObject spawnedObject { get; private set; }
 
     void Awake()
     {
         m_RaycastManager = GetComponent<ARRaycastManager>();
+        debugText = GameObject.Find("Debug Text").GetComponent<Text>();
+        modelNameText = GameObject.Find("Model Name").GetComponent<Text>();
 
         // Assign a callback for when the rotation slider changes
-        this.slider.onValueChanged.AddListener(this.OnSliderChanged);
+        this.rotationSlider.onValueChanged.AddListener(this.OnRotationSliderChanged); // rotation slider callback
+        this.scaleSlider.onValueChanged.AddListener(this.OnScaleSliderChanged); // rotation slider callback
 
         // And current value
-        this.previousValue = this.slider.value;
+        this.previousValue = this.rotationSlider.value;
     }
 
     bool TryGetTouchPosition(out Vector2 touchPosition)
     {
-#if UNITY_EDITOR
-        if (Input.GetMouseButton(0))
-        {
-            var mousePosition = Input.mousePosition;
-            touchPosition = new Vector2(mousePosition.x, mousePosition.y);
-            return true;
-        }
-#else
-        if (Input.touchCount > 0)
-        {
-            touchPosition = Input.GetTouch(0).position;
-            return true;
-        }
-#endif
+        #if UNITY_EDITOR
+            if (Input.GetMouseButton(0))
+            {
+                var mousePosition = Input.mousePosition;
+                touchPosition = new Vector2(mousePosition.x, mousePosition.y);
+                return true;
+            }
+        #else
+            if (Input.touchCount > 0)
+            {
+                touchPosition = Input.GetTouch(0).position;
+                return true;
+            }
+        #endif
 
         touchPosition = default;
         return false;
@@ -86,12 +89,8 @@ public class PlaceOnPlane : MonoBehaviour
 
         if (EventSystem.current.IsPointerOverGameObject(touch.fingerId))
         {
-            // debugText.text = "Clicked in UI";
             return;
         }
-
-
-
 
         if (!TryGetTouchPosition(out Vector2 touchPosition))
             return;
@@ -106,6 +105,11 @@ public class PlaceOnPlane : MonoBehaviour
             {
                 spawnedObject = Instantiate(m_PlacedPrefab, hitPose.position, hitPose.rotation);
                 objectToRotate = spawnedObject;
+
+                objectNameString = placedPrefab.name;
+                objectNameString = objectNameString.Substring(5); // strip off number in front of prefab name
+                modelNameText.text = objectNameString.Replace("(Clone)", "");
+
             }
             else
             {
@@ -115,20 +119,23 @@ public class PlaceOnPlane : MonoBehaviour
     }
 
 
-    void OnSliderChanged(float value)
+    void OnRotationSliderChanged(float value)
     {
-        // objectToRotate = GameObject.Find("TimeWalkObject");
-        Debug.Log("object: " + objectToRotate);
-
         // How much we've changed
         float delta = value - this.previousValue;
         this.objectToRotate.transform.Rotate(Vector3.down * delta * 360);
 
-
-        Debug.Log("object transform: " + objectToRotate.transform);
-
         // Set our previous value for the next change
         this.previousValue = value;
+    }
+
+
+
+    // SCALE CHANGE
+    void OnScaleSliderChanged(float value)
+    {
+        // Set scale based on slider position
+        this.objectToRotate.transform.localScale = new Vector3(value, value, value);
     }
 
     static List<ARRaycastHit> s_Hits = new List<ARRaycastHit>();
