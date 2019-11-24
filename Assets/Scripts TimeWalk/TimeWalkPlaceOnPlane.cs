@@ -22,10 +22,9 @@ public class TimeWalkPlaceOnPlane : MonoBehaviour
 
     // Assign in the inspector
     private GameObject objectToModify;
-    private ParticleSystem fireworksParticleSystem;
     public Slider rotationSlider;
     public Slider scaleSlider;
-    public Button fireworksButton;
+    public Button nextPrefabButton;
 
     // Preserve the original and current orientation
     private float previousValue;
@@ -43,19 +42,19 @@ public class TimeWalkPlaceOnPlane : MonoBehaviour
     // The object instantiated as a result of a successful raycast intersection with a plane.
     public GameObject spawnedObject { get; private set; }
 
-    void Awake()
+    void Start()
     {
         m_RaycastManager = GetComponent<ARRaycastManager>();
         debugText = GameObject.Find("Debug Text").GetComponent<Text>();
         scaleText = GameObject.Find("Scaling Ratio Text").GetComponent<Text>();
         modelNameText = GameObject.Find("Model Name").GetComponent<Text>();
+        modelNameText.text = ""; // blank name until placed
+
 
         // Assign a callback for when the rotation slider changes
         this.rotationSlider.onValueChanged.AddListener(this.OnRotationSliderChanged); // rotation slider callback
         this.previousValue = this.rotationSlider.value;
         this.scaleSlider.onValueChanged.AddListener(this.OnScaleSliderChanged); // rotation slider callback
-        this.fireworksButton.onClick.AddListener(this.LaunchFireworks); // fireworks launch callback
-
     }
 
     bool TryGetTouchPosition(out Vector2 touchPosition)
@@ -94,12 +93,16 @@ public class TimeWalkPlaceOnPlane : MonoBehaviour
                         spawnedObject = Instantiate(m_PlacedPrefab, new Vector3(0, 0, 0), Quaternion.identity);
                         //modelNameText.text = ModelNameFix(placedPrefab.name);
                         modelNameText.text = displayName;
+                        //debugText.text = "GUI clicked";
+
                 }
-                    else
+                else
                     {
                         spawnedObject.transform.position = new Vector3(0, 0, 0);
-                    }
+                        //debugText.text = "spawnedObject positioned";
+
                 }
+            }
             }
         #endif
 
@@ -166,13 +169,6 @@ public class TimeWalkPlaceOnPlane : MonoBehaviour
         float ret;
         ret = Mathf.Pow(10, (value - 1));
         return ret;
-    }
-
-    void LaunchFireworks()
-    {
-        fireworksParticleSystem = GameObject.Find("Rocket particles").GetComponent<ParticleSystem>();
-        fireworksParticleSystem.Play();
-
     }
 
     static List<ARRaycastHit> s_Hits = new List<ARRaycastHit>();
