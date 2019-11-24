@@ -597,7 +597,6 @@ MonoBehaviour:
     type: 3}
   rotationSlider: {fileID: 421589288}
   scaleSlider: {fileID: 478273353}
-  fireworksButton: {fileID: 1479615861}
   nextPrefabButton: {fileID: 1479615862}
   displayName: TimeWalk Object
 --- !u!114 &1335839539
@@ -757,20 +756,33 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6263416240397333159, guid: 2ac6705d2821f4c6f9458b7220d4210d,
+        type: 3}
+      propertyPath: m_Text
+      value: Model Name Here
+      objectReference: {fileID: 0}
+    - target: {fileID: 1064182585153767376, guid: 2ac6705d2821f4c6f9458b7220d4210d,
+        type: 3}
+      propertyPath: m_Text
+      value: Debug Text here
+      objectReference: {fileID: 0}
+    - target: {fileID: 8320450176123703628, guid: 2ac6705d2821f4c6f9458b7220d4210d,
+        type: 3}
+      propertyPath: m_Color.a
+      value: 0.36862746
+      objectReference: {fileID: 0}
+    - target: {fileID: 7313937440984113398, guid: 2ac6705d2821f4c6f9458b7220d4210d,
+        type: 3}
+      propertyPath: m_Color.a
+      value: 0.14901961
+      objectReference: {fileID: 0}
+    - target: {fileID: 5001467970973786782, guid: 2ac6705d2821f4c6f9458b7220d4210d,
+        type: 3}
+      propertyPath: m_Color.a
+      value: 0.44705883
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2ac6705d2821f4c6f9458b7220d4210d, type: 3}
---- !u!114 &1479615861 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6214697271201460201, guid: 2ac6705d2821f4c6f9458b7220d4210d,
-    type: 3}
-  m_PrefabInstance: {fileID: 1479615860}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1479615862 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5654745502264303506, guid: 2ac6705d2821f4c6f9458b7220d4210d,

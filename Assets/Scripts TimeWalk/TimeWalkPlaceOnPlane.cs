@@ -21,7 +21,6 @@ public class TimeWalkPlaceOnPlane : MonoBehaviour
 
 
     // Assign in the inspector
-    private GameObject objectToModify;
     public Slider rotationSlider;
     public Slider scaleSlider;
     public Button nextPrefabButton;
@@ -31,7 +30,6 @@ public class TimeWalkPlaceOnPlane : MonoBehaviour
     private Text debugText;
     private Text scaleText;
     private Text modelNameText;
-    public string displayName;
 
     public GameObject placedPrefab
     {
@@ -46,6 +44,8 @@ public class TimeWalkPlaceOnPlane : MonoBehaviour
     {
         m_RaycastManager = GetComponent<ARRaycastManager>();
         debugText = GameObject.Find("Debug Text").GetComponent<Text>();
+        debugText.text = ""; // blank to start
+
         scaleText = GameObject.Find("Scaling Ratio Text").GetComponent<Text>();
         modelNameText = GameObject.Find("Model Name").GetComponent<Text>();
         modelNameText.text = ""; // blank name until placed
@@ -91,16 +91,10 @@ public class TimeWalkPlaceOnPlane : MonoBehaviour
                     if (spawnedObject == null) // if the object has not been spawned yet, then spawn it at origin
                     {
                         spawnedObject = Instantiate(m_PlacedPrefab, new Vector3(0, 0, 0), Quaternion.identity);
-                        //modelNameText.text = ModelNameFix(placedPrefab.name);
-                        modelNameText.text = displayName;
-                        //debugText.text = "GUI clicked";
-
                 }
                 else
                     {
                         spawnedObject.transform.position = new Vector3(0, 0, 0);
-                        //debugText.text = "spawnedObject positioned";
-
                 }
             }
             }
@@ -122,9 +116,6 @@ public class TimeWalkPlaceOnPlane : MonoBehaviour
             if (spawnedObject == null)
             {
                 spawnedObject = Instantiate(m_PlacedPrefab, hitPose.position, hitPose.rotation);
-                //modelNameText.text = ModelNameFix(placedPrefab.name);
-                modelNameText.text = displayName;
-
             }
             else
             {
@@ -152,15 +143,6 @@ public class TimeWalkPlaceOnPlane : MonoBehaviour
         if (scaleRatio > 10) scaleRatio = System.Math.Round(scaleRatio, 0);
         scaleText.text = "Scale = 1 : " + scaleRatio;
         this.spawnedObject.transform.localScale = new Vector3(scaleValue, scaleValue, scaleValue);
-    }
-
-    // Convert Prefab name to Model Name String
-    string ModelNameFix(string originalName)
-    {
-        string ret;
-        ret = originalName.Substring(5); // strip off number in front of prefab name
-        ret = ret.Replace("(Clone)", "");
-        return ret;
     }
 
     // Convert Scale Slider to Scale Value

@@ -56,11 +56,8 @@ public class ChoosePrefab : MonoBehaviour
             ++objectsListLength;
         }
 
-
         // Now enable the first (0th) object
         currentObjectIndex = 0;
-        //NextPrefab(+1); // this will enable the first object to show up
-        debugText.text = "ChoosePrefab: currentObjectIndex = " + currentObjectIndex;
         myListObjects[currentObjectIndex].transform.gameObject.SetActive(true);
         modelNameText.text = ModelName(myListObjects[currentObjectIndex]);
     }
@@ -110,13 +107,15 @@ public class ChoosePrefab : MonoBehaviour
 
     void LaunchFireworks()
     {
-        fireworksParticleSystem = GameObject.Find("Fireworks").GetComponent<ParticleSystem>();
-        if (fireworksParticleSystem != null)
+        GameObject fireworksTest = GameObject.Find("Fireworks");
+        //fireworksParticleSystem = GameObject.Find("Fireworks").GetComponent<ParticleSystem>();
+        if (fireworksTest != null)
         {
+            fireworksParticleSystem = fireworksTest.GetComponent<ParticleSystem>();
             fireworksParticleSystem.Play();
             debugText.text = "Fireworks!";
         }
-        
+        //debugText.text = "";
 
     }
 }
