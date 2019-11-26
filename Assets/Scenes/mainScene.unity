@@ -598,7 +598,6 @@ MonoBehaviour:
   rotationSlider: {fileID: 421589288}
   scaleSlider: {fileID: 478273353}
   nextPrefabButton: {fileID: 1479615862}
-  displayName: TimeWalk Object
 --- !u!114 &1335839539
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -775,6 +774,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Color.a
       value: 0.14901961
+      objectReference: {fileID: 0}
+    - target: {fileID: 7362621581310558988, guid: 2ac6705d2821f4c6f9458b7220d4210d,
+        type: 3}
+      propertyPath: m_FontData.m_FontSize
+      value: 33
       objectReference: {fileID: 0}
     - target: {fileID: 5001467970973786782, guid: 2ac6705d2821f4c6f9458b7220d4210d,
         type: 3}

@@ -101,7 +101,7 @@ public class TimeWalkPlaceOnPlane : MonoBehaviour
         #endif
 
         // Return if clicking in UI area
-        Touch touch; // per ARCore example (compare to below)
+        Touch touch;
 
         if (Input.touchCount < 1 || (touch = Input.GetTouch(0)).phase != TouchPhase.Began) return;
         if (EventSystem.current.IsPointerOverGameObject(touch.fingerId)) return;
@@ -116,10 +116,14 @@ public class TimeWalkPlaceOnPlane : MonoBehaviour
             if (spawnedObject == null)
             {
                 spawnedObject = Instantiate(m_PlacedPrefab, hitPose.position, hitPose.rotation);
+                debugText.text = "First tap, placed at "  + hitPose.position;
+
             }
             else
             {
                 spawnedObject.transform.position = hitPose.position;
+                debugText.text = "Move tap, placed at " + hitPose.position;
+
             }
         }
     }

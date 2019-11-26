@@ -55,6 +55,9 @@ public class ChoosePrefab : MonoBehaviour
             myListObjects.Add(temporaryObject);
             ++objectsListLength;
         }
+        debugText.text = "In ChoosePrefab for " + this.gameObject.name
+            + "\nPosition: " + this.gameObject.transform.position;
+
 
         // Now enable the first (0th) object
         currentObjectIndex = 0;
